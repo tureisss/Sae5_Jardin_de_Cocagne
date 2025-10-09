@@ -1,0 +1,71 @@
+<?php
+
+namespace App\DataFixtures;
+
+use App\Entity\Depot;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+
+class DepotFixtures extends Fixture
+{
+    public function load(ObjectManager $manager): void
+    {
+        $depots = [
+            ['Jardins de Cocagne',100,'Prairie Claudel','88150','Thaon-les-Vosges',6.427672,48.2531016],
+            ['Asso Étudiant Universitaire',20,'9 rue de la Louvière','88000','Épinal',6.4531588,48.1723212],
+            ['Conseil Départemental des Vosges',20,'8 rue de la Préfecture','88000','Épinal',6.4445154,48.1721724],
+            ['Asso Rhyzome',20,'15 rue des Jardiniers','88000','Épinal',6.452224,48.1706099],
+            ['Pharmacie Saint Nabord',20,'24 rue du Gal de Gaulle','88200','St Nabord',6.5807814,48.0510352],
+            ['Denninger',20,'36 bis rue de la Plaine','88190','Golbey',6.4426982,48.1929337],
+            ['3e Rive (Café Associatif)',20,'15 rue du Maréchal Lyautey','88000','Épinal',6.4457306,48.177777],
+            ['Crédit Agricole',20,'Allée des Érables','88000','Épinal',6.454908,48.20399],
+            ['Centre Léo Lagrange',60,'6 av. Salvador Allende','88000','Épinal',6.4599403,48.1938105],
+            ['Boulassel Docelles',20,'1 rue Moncey','88460','Docelles',6.6162166,48.1460719],
+            ['Ligue de l’enseignement',40,'15 rue Général de Reffye','88000','Épinal',6.4323215,48.1819469],
+            ['Garage Renault- Station Service',20,'664 rue de la Gare','88550','Pouxeux',6.5760129,48.1051197],
+            ['Adinolfi',40,'7 allée des Primevères','88390','Les Forges',6.397633,48.171791],
+            ['Lecompte François',40,'24 route du Noirpré','88530','Le Tholy',6.7477787,48.0812967],
+            ['Papeterie Norske Skog',20,'ZI Route Charles Pellerin','88190','Golbey',6.423976,48.208795],
+            ['Botanic',20,'9 av. des Terres St Jean','88000','Épinal',6.4692286,48.1891998],
+            ['Pro & Cie',40,'7 rue de la République','88400','Gérardmer',6.877433,48.074172],
+            ['Mme Pierot Charmes',40,'15 rue Ste Barbe','88130','Charmes',6.2951122,48.3777043],
+            ['DVIS Epinal',20,'1 Rue de la Préfecture','88000','Épinal',6.44875,48.172438],
+            ['Peridon',20,'7 rue du Savron','88220','Raon-aux-Bois',6.5036466,48.0504027],
+            ['Chambre d’Agriculture',20,'17 rue André Vitu','88000','Épinal',6.465403,48.1775685],
+            ['Biocoop',20,'7 rue du Boudiou','88000','Épinal',6.447245,48.174228],
+            ['Moustaches Bikes',20,'5 rue du Ruisseau','88150','Thaon-les-Vosges',6.4005773,48.2576491],
+            ['Vosgelis Remiremont',20,'4 place de l’Abbaye','88200','Remiremont',6.592068,48.015964],
+            ['Église Saint Antoine',60,'12 rue Armand Colle','88000','Épinal',6.4489619,48.1604568],
+            ['Maison de l’Environnement',20,'12 rue  Raymond Poincaré','88000','Épinal',6.449693,48.175374],
+            ['Vosgelis',20,'8 quai Barbier','88000','Épinal',6.44519,48.171198],
+            ['Association GACI',20,'26 rue de la Joncherie','88200','Remiremont',6.5934293,48.0189339],
+            ['Brico Marché',20,'2 rue de Fraisne','88600','Bruyères',6.7196903,48.2050495],
+            ['Office du tourisme',20,'6 place C. Poncelet','88200','Remiremont',6.5917178,48.0159918],
+            ['Point Vert Mafra',20,'5 rue des Résistants Zac Barbazan','88600','Bruyères',6.7208371,48.2032056],
+            ['La Quarterelle',20,'3 rue Carterelle','88200','Épinal',6.7208371,48.2032056],
+            ['Léo Lagrange',20,'Chemin du Tambour Major','88000','Épinal',6.7208371,48.2032056],
+            ['Bouvier Emmanuel',20,'557 rue du Chêne','88220','Hadol',6.484004,48.108499],
+            ['APF - Local extérieur – ESAT',20,'rue de la papeterie','88000','Dinozé',6.4738942,48.1383687],
+            ['La tête à Toto',20,'26 quai des Bons Enfants','88000','Épinal',6.4409549,48.1748623],
+            ['UIMM',20,'Label Initiative','88150','Thaon-les-Vosges',6.4409549,48.1748623],
+            ['Résidence du Monsey',20,'Ruelle de Monsey','88450','Vincey',6.33085,48.337907],
+            ['Complexe Sportif',40,'Bld Georges Clemenceau','88130','Charmes',6.298452,48.375298],
+            ['Fives',20,'2 rue des Amériques','88190','Golbey',6.428831,48.20015],
+            ['Nomexy Secours Catholique',20,'1 place de Verdun','88440','Nomexy',6.386527,48.305704],
+        ];
+
+        foreach ($depots as $data) {
+            $depot = new Depot();
+            $depot->setNom($data[0]);
+            $depot->setCapacite($data[1]);
+            $depot->setAdresse($data[2]);
+            $depot->setCodePostal($data[3]);
+            $depot->setVille($data[4]);
+            $depot->setLongitude($data[5]);
+            $depot->setLatitude($data[6]);
+            $manager->persist($depot);
+        }
+
+        $manager->flush();
+    }
+}
