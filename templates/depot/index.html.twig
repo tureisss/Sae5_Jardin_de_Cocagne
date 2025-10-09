@@ -1,0 +1,8 @@
+<h1>Liste des dépôts</h1>
+<ul>
+  {% for depot in depots %}
+    <li>{{ depot.nom }} – {{ depot.ville }}</li>
+  {% else %}
+    <li>Aucun dépôt trouvé</li>
+  {% endfor %}
+</ul>
