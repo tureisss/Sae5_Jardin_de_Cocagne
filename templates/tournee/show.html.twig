@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tournée {{ tournee.nom }}{% endblock %}
+
+{% block body %}
+<h1>{{ tournee.nom }}</h1>
+<p>Date : {{ tournee.date|date('d/m/Y H:i') }}</p>
+
+<h2>Dépôts</h2>
+<ul>
+    {% for depot in tournee.depots %}
+        <li>{{ depot.nom }} – {{ depot.ville }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Carte</h2>
+<div id="map" style="height: 500px;"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+<script>
+    var map = L.map('map').setView([48.17, 6.45], 10);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    var waypoints = [
+        {% for depot in tournee.depots %}
+            L.latLng({{ depot.latitude }}, {{ depot.longitude }}),
+        {% endfor %}
+    ];
+
+    {% for depot in tournee.depots %}
+        L.marker([{{ depot.latitude }}, {{ depot.longitude }}])
+            .addTo(map)
+            .bindPopup("{{ depot.nom }} - {{ depot.ville }}");
+    {% endfor %}
+
+    if (waypoints.length > 1) {
+        L.Routing.control({
+            waypoints: waypoints,
+            routeWhileDragging: true
+        }).addTo(map);
+    }
+</script>
+
+<a href="{{ path('tournee_index') }}">⬅ Retour</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Tournées{% endblock %}
+
+{% block body %}
+<h1>Tournées</h1>
+
+<a href="{{ path('tournee_new') }}">➕ Nouvelle tournée</a>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+    {% for tournee in tournees %}
+        <tr>
+            <td>{{ tournee.id }}</td>
+            <td>{{ tournee.nom }}</td>
+            <td>{{ tournee.date|date('d/m/Y H:i') }}</td>
+            <td>
+                <a href="{{ path('tournee_show', {id: tournee.id}) }}">👁 Voir</a>
+                <a href="{{ path('tournee_edit', {id: tournee.id}) }}">✏ Modifier</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
