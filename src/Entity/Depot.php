@@ -6,33 +6,36 @@ use App\Repository\DepotRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DepotRepository::class)]
+#[ORM\Table(name: "depot")]
 class Depot
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: "integer")]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: "string", length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: "integer")]
     private ?int $capacite = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: "string", length: 255)]
     private ?string $adresse = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(name: "code_postal", type: "string", length: 10)]
     private ?string $codePostal = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(type: "string", length: 100)]
     private ?string $ville = null;
 
-    #[ORM\Column(type: 'float')]
+    #[ORM\Column(type: "float", nullable: true)]
     private ?float $longitude = null;
 
-    #[ORM\Column(type: 'float')]
+    #[ORM\Column(type: "float", nullable: true)]
     private ?float $latitude = null;
+
+    // Getters & Setters
 
     public function getId(): ?int
     {
@@ -99,7 +102,7 @@ class Depot
         return $this->longitude;
     }
 
-    public function setLongitude(float $longitude): self
+    public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
         return $this;
@@ -110,10 +113,9 @@ class Depot
         return $this->latitude;
     }
 
-    public function setLatitude(float $latitude): self
+    public function setLatitude(?float $latitude): self
     {
         $this->latitude = $latitude;
         return $this;
     }
 }
-
